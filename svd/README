@@ -1,1 +1,73 @@
+############################################################
+# Copyright (c) June 2023.
+# Dmytro Kotov, mail to dmytro.kotov97@gmail.com
+############################################################
+# Singular Value Decomposition (SVD) via Eigen Decomposition
+############################################################
+#
+# This script implements the Singular Value Decomposition
+# (SVD) of a matrix A using eigenvalue decomposition
+# instead of the built-in svd() function.
+#
+# Mathematical Goal:
+#   Decompose A ∈ R^(m×n) as
+#       A ≈ V Σ U^T
+#   where:
+#       U ∈ R^(n×n) : left singular vectors
+#       Σ ∈ R^(n×n) : diagonal matrix of singular values
+#       V ∈ R^(m×n) : right singular vectors
+#
+############################################################
+# Methodology
+############################################################
+#
+# 1. Compute the Gram matrix:
+#       A^T A ∈ R^(n×n)
+#
+# 2. Eigenvalue decomposition of A^T A:
+#       A^T A = U Λ U^T
+#   - Λ = diag(λ_1, ..., λ_n), eigenvalues of A^T A
+#   - U = [u_1, ..., u_n], eigenvectors of A^T A
+#
+# 3. Numerical conditioning:
+#   - Eigenvalues λ_i < 1e-12 are treated as 0
+#   - Non-zero singular values: σ_i = √λ_i
+#
+# 4. Construct Σ (singular value matrix):
+#       Σ = diag(σ_1, ..., σ_r)
+#   - r = rank(A)
+#   - Dimensions adjusted to match U and V
+#
+# 5. Compute right singular vectors V:
+#       v_i = (A u_i) / σ_i, for σ_i ≠ 0
+#
+# 6. Reconstruct approximation of A:
+#       A ≈ V Σ U^T
+#
+############################################################
+# Input
+############################################################
+#
+# A : real-valued numeric matrix, size m×n
+#
+############################################################
+# Output
+############################################################
+#
+# - U : left singular vectors (n×n)
+# - Σ : singular value matrix (n×n, diagonal)
+# - V : right singular vectors (m×n)
+# - Reconstructed matrix: A ≈ V Σ U^T
+#
+############################################################
+# Notes
+############################################################
+#
+# - Designed for educational purposes and demonstration
+#   of the mathematical construction of SVD.
+# - Not optimized for large-scale computation.
+# - For practical use, prefer built-in svd() function.
+#
+############################################################
+
 
